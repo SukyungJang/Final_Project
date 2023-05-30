@@ -1,97 +1,93 @@
-# Kaggle Store Sales - 시계열 예측 (~ 2023.05.17)
+# Final Project - 도시 양극화 (2023.05.22 ~)
 <br/>
-
-## [1. 테스트 링크](https://sukyungjang-store-sales-project-main-app-4r8mb6.streamlit.app/ "Streamlit Link")<br/>
-
-## [2. 테스트 링크](https://www.youtube.com/watch?v=YZGgZdaFF78 "Presentation Link")<br/>
-
-## [3. 테스트 링크](https://github.com/SukyungJang/Store_Sales_Project/blob/main/pdf/Attention_final.pdf "PDF Link")<br/>
 
 ---
-![image](https://github.com/SukyungJang/Store_Sales_Project/blob/main/img/main-store.png)
 
-## ✔ 목적
+[![Dashboard](https://img.shields.io/badge/Dashboard-Access-green.svg)](https://moonstyie-parkinson-app-q81f6f.streamlit.app/#parkinson-s-description)
+[![Presentation](https://img.shields.io/badge/Presentation-Access-green.svg)](https://youtu.be/XZtytuxL8ws)
+[![Demo](https://img.shields.io/badge/Demo-Access-green.svg)](https://youtu.be/XZtytuxL8ws?t=1073)
+[![Portpolio](https://img.shields.io/badge/Portpolio-Access-green.svg)](https://github.com/MoonStyIe/Parkinson/blob/9bed58006a8d646d4058b96eca4f8704263e94c2/pdf/2%EC%A1%B0_%ED%8C%8C%ED%82%A8%EC%8A%A8_%EC%A7%88%EB%B3%91_%EC%A7%84%EB%8B%A8%EC%98%88%EC%B8%A1.pdf)
+[![Homepage](https://img.shields.io/badge/Homepage-Access-green.svg)](https://github.com/MoonStyIe/Parkinson/blob/e4ea531c446b2dbe079b19ce68930753cfd72afa/img/%ED%99%88%ED%8E%98%EC%9D%B4%EC%A7%80.png)
 
+---
 
-### [테스트 링크](https://www.kaggle.com/competitions/store-sales-time-series-forecasting, "Kaggle Link") <br/>
+## 💡 목적
 
-## ✔ 데이터
-
-
-### [테스트 링크](https://www.kaggle.com/competitions/store-sales-time-series-forecasting/data, "Data Link") <br/>
-
-## ✔ ERD
-![image](https://github.com/SukyungJang/Store_Sales_Project/blob/main/img/STORESALES_EDR.png)
 <br/>
 
-## ✔ 팀 구성
-- 사용언어 : Python 3.10.10
-- 작업툴 : VS Code
-- 인원 : 4명
-- 주요 업무 : Streamlit 라이브러리 활용 웹 서비스 구현 및 머신러닝을 활용한 매장 매출 예측
-- 기간 : 2023.05.01 ~ 2023.05.17
+## 📁 데이터
 
-## ✔ 주요 기능
-- **INTRO 페이지**
-  - Store Sales 대회에 대한 소개, 목표, 분석 단계에 대한 설명
-
-- **DATA 페이지**
-  - Store Sales 대회에서 제공하는 데이터에 대한 정보와 기술통계량 제공
-
-![image1](https://github.com/SukyungJang/Store_Sales_Project/blob/main/img/github-data.png)
-- **Exploratory Data Analysis**
-  - 시간 지남에 따른 상점별 매출 시각화
-  - 시간 지남에 따른 제품군별 매출 시각화
-  - 주/월별 지연값에 대한 매출 시각화
-  - 주/월별 매출에 대한 시각화
-  - 시간 지남에 따른 상점별 거래량 시각화
-  - 월별 거래량 시각화
-  - 매출과 거래량 간 상관분석 시각화
-  - 요일별 거래량 시각화
-  - 시간 지남에 따른 유가 시각화
-  - 유가와 매출 및 거래량 간 상관분석 및 시각화
-  - 유가와 제품군별 매출 간 상관분석 및 시각화
-
-![image2](https://github.com/SukyungJang/Store_Sales_Project/blob/main/img/github-eda.png)
-- **STAT**
-  - 상관분석에 대한 설명 및 지연값들 간 상관분석 시각화
-  - ACF / PACF에 대한 설명 및 제품군별 ACF / PACF 시각화
-  - Features(추세, 계절성, 지연값)에 대한 설명 및 시각화
-  - 주/월 단순이동평균선 및 지수이동평균선 시각화
-
-![image3](https://github.com/SukyungJang/Store_Sales_Project/blob/main/img/stat.png)
-- **ML**
-  - RandomForest 모델을 사용한 상점별 매출 및 거래량 예측
-
-![image4](https://github.com/SukyungJang/Store_Sales_Project/blob/main/img/ML.png)
-## ✔ 설치 방법
-
-### Windows
-- 버전 확인
-  - VS Code : 
-  - Python : 3.10.10
-  - 라이브러리 : Pandas(1.5.3), NumPy(1.24.3), Math, Seaborn(0.11.2), Streamlit(1.22.0), Matplotlib(3.7.1), Plotly(5.14.1), Scikit-learn(1.2.2), Scipy(1.10.1)
-
-- 프로젝트 파일을 다운로드 받습니다.
-```
-git clone https://github.com/jangsukyung/Store-Sales-Project.git
-```
-- 프로젝트 경로에서 가상환경 설치 후 접속합니다. (Windows 10 기준)
-```
-virtualenv venv
-source venv/Scripts/activate
-```
-- 라이브러리를 설치합니다.
-```
-pip install -r requirements.txt
-```
-- streamlit 명령어를 실행합니다.
-```
-streamlit run app.py
-```
-# Kaggle Store Sales - 시계열 예측 (~ 2023.05.17)
 <br/>
-## ✔ 주요 기능 업데이트 내용 <br/>
-- 홈페이지 <br/>
-  - ㅁ <br/>
-- ㅁ <br/>
+
+## 📊 ERD
+
+<br/>
+
+## 🧑‍🤝‍🧑 팀 구성
+
+<br/>
+
+## 💻 주요 기능
+
+<br/>
+
+## 📥 설치 방법
+
+<br/>
+
+## 📅 주요 기능 업데이트 내용 <br/>
+*2023-05-22(월)*
+- 대시보드
+    + 홈 탭, 조회 탭, EDA 탭 작성
+    + 홈 탭의 프로젝트 개요 작성
+- PPT
+    + 표지 작성
+    + 목차 초안 작성
+
+---
+
+*2023-05-23(화)*
+- 대시보드
+    + 조회 탭의 도별 탭 작성
+    + 조회 탭의 시별 탭 작성
+    + 수원시 탭의 샘플 지도 작성
+- PPT
+    + 표지 재작업
+    + 목차 완성
+    + 상세 목차 작성
+    + 프로젝트 개요 작성
+    + 팀 역할분담 페이지 작성 및 임시 플롯 차트 완성
+- 데이터 수집
+    + 나비스(NABIS) 국가균형발전종합정보시스템 데이터 수집
+    + 균형지표 관련 데이터 수집
+    + 전국 위도·경도 데이터 수집
+
+---
+
+*2023-05-24(수)*
+- PPT
+    + 목차 재작업
+- 데이터 수집
+    + 균형발전지표 데이터 수집, 전처리
+    + 나비스(NAVIS) 데이터 전처리
+
+---
+
+*2023-05-25(목)*
+- 대시보드
+    + 데이터 탭 작성
+    + 조회 탭 재구성
+- PPT
+    + 목차 재정비
+    + 연구배경 작성
+    + 연구목적 작성
+    + 선정배경 작성
+- 데이터 수집
+    + 빅쿼리(BigQuery) 데이터 적재
+    + 충청도 데이터 수집
+    + 충청지방통계청에서 충청도권 데이터 수집
+    + 충남형 양극화 지수 현황판 확인을 위해 충청남도 데이터 담당자에게 전화로 문의
+- QGIS
+    + 지도구현
+- 분석
+    + 회귀분석 공부

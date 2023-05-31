@@ -2,277 +2,166 @@
 
 # 라이브러리
 import streamlit as st
-import mapboxgl
-from mapboxgl.viz import *
 import json
 import pandas as pd
 import geopandas as gpd
-from mapboxgl.utils import df_to_geojson
-from mapboxgl.utils import create_color_stops
 import warnings
-import geopandas as gpd
-import json
-import pydeck as pdk
-from streamlit_folium import folium_static
 import folium
 
-def city():
-    # prepare and read data
-    shape = r'C:/Users/YONSAI/Desktop/Final_Project/data/Mapboxgl_package/data/siig.shp'
-    data = gpd.read_file(shape, encoding = 'cp949')
-
-    # 데이터프레임의 일부를 선택
-    chungcheong = data.loc[135:164]
-    daejeon = data.loc[64:68]
-    sejong = data.loc[74:75]
-
-    geometry = pd.concat([daejeon, sejong, chungcheong]).reset_index(drop = True)
-
-    # 열 이름 변경을 위한 딕셔너리
-    new_column_names = {'SIG_CD': '행정코드', 'SIG_ENG_NM': '행정영어', 'SIG_KOR_NM': '행정구역', 'geometry': 'geometry'}
-
-    # 열 이름 변경 적용
-    geometry = geometry.rename(columns=new_column_names)
-
-    data = pd.read_csv(r'C:/Users/YONSAI/Desktop/Final_Project/data/Mapboxgl_package/data/1인당_GRDP.csv', encoding='cp949')
-
-    # 데이터 합치기
-    data = pd.merge(geometry, data, on='행정구역', how='outer')
-
-    # 열 제거
-    data.drop(columns=['행정코드', '행정영어'], axis=1, inplace=True)
-
-    # 데이터 채우기
-    data.iloc[6:10, 2:] = data.iloc[36, 2:]  # 청주시
-    data.iloc[20:22, 2:] = data.iloc[37, 2:]  # 천안시
-
-    # 행 제거
-    data.drop(index=[36, 37], axis=0, inplace=True)
-
-    # 10분위 수
-    column_to_divide = '2020년'  # 분위를 계산할 열 선택
-
-    percentiles = pd.qcut(data[column_to_divide], 10, labels=False)
-
-    data['10분위수'] = percentiles + 1
-
-    # GeoJSON으로 변환하여 저장합니다
-    data.to_file(r'C:/Users/YONSAI/Desktop/Final_Project/data/Mapboxgl_package/data/1인당_GRDP.geojson', driver='GeoJSON')
-
-    geo_data = r'C:/Users/YONSAI/Desktop/Final_Project/data/Mapboxgl_package/data/1인당_GRDP.geojson'
-    with open(geo_data, encoding='utf-8') as f:
+def data_processing():
+    # 데이터 불러오기
+    geo_data = r'C:\Users\YONSAI\Desktop\Python_Studying\Mapboxgl_package\data\GRDP.geojson'
+    with open(geo_data) as f:
         geo_data = json.loads(f.read())
+    grdp_data = pd.read_csv(r'C:\Users\YONSAI\Desktop\Python_Studying\Mapboxgl_package\data\GRDP_최종.csv',
+                            encoding = 'cp949')
+    return geo_data, grdp_data
+def data_folium_all(geo_data, data):
+    map = folium.Map(location=[36.6425, 127.489], zoom_start=9)
 
-    # 토큰
-    token = 'pk.eyJ1IjoibW9vbnN0eWxlIiwiYSI6ImNsaTQ2cnVlMzBobGczcXJiaXZmN3drcjcifQ.emASVayNBZqrif5WBVucKQ'
+    folium.Choropleth(
+        geo_data = geo_data,
+        name = "choropleth",
+        data = data,
+        columns = ["행정구역", "10분위수"],
+        key_on = 'feature.properties.행정구역',
+        fill_color = "YlOrRd",
+        fill_opacity = 0.7,
+        line_opacity = 0.2,
+        legend_name = "GRDP 10분위수",
+    ).add_to(map)
 
-    # 청주시의 경도, 위도 입니다.
-    center = [127.489, 36.6425]
+    for i in range(len(data['행정구역'])):
+        popup_content = ('행정구역 : ' + str(data['행정구역'][i]) + '<br>' +
+                         '2015년 : ' + str(data['2015'][i]) + '<br>' +
+                         '2016년 : ' + str(data['2016'][i]) + '<br>' +
+                         '2017년 : ' + str(data['2017'][i]) + '<br>' +
+                         '2018년 : ' + str(data['2018'][i]) + '<br>' +
+                         '2019년 : ' + str(data['2019'][i]) + '<br>' +
+                         '10분위수 : ' + str(data['10분위수'][i]) + '분위수')
+        popup = folium.Popup(popup_content, max_width = 130)
+        folium.Marker([data['latitude'][i], data['longitude'][i]],
+                      popup = popup,
+                      icon = folium.Icon(color = 'blue', icon = 'info-sign')).add_to(map)
 
-    # 시각화 할 값에 따른 색상의 범주를 지정해줍니다.
-    color_breaks = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-    color_stops = create_color_stops(color_breaks, colors='YlOrBr')
+    folium.LayerControl().add_to(map)
 
-    # ChoroplethViz 를 그립니다.
-    viz = ChoroplethViz(
-        access_token=token,
-        data=geo_data,
-        color_property='10분위수',
-        color_stops=color_stops,
-        center=center,
-        line_color='black',
-        line_width=3,
-        line_opacity=1,
-        opacity=1,
-        zoom=8,
-        below_layer='poi-label'
-    )
+    map
 
-    viz.show()
+def data_folium_local(geo_data, data, percentile):
+    data_local = data[data['10분위수'] == percentile]
+
+    map = folium.Map(location=[36.6425, 127.489], zoom_start=9) # 지도 생성
+
+    folium.Choropleth(
+        geo_data = geo_data,
+        name = "choropleth",
+        data = data_local,
+        columns = ["행정구역", "10분위수"],
+        key_on = 'feature.properties.행정구역',
+        fill_color = "YlOrRd",
+        fill_opacity = 0.7,
+        line_opacity = 0.2,
+        legend_name = "GRDP 10분위수",
+    ).add_to(map)
+
+    for i in range(len(data_local['행정구역'])):
+        # 마커 내용
+        popup_content = ('행정구역 : ' + str(data_local['행정구역'].values[i]) + '<br>' +
+                         '2015년 : ' + str(data_local['2015'].values[i]) + '<br>' +
+                         '2016년 : ' + str(data_local['2016'].values[i]) + '<br>' +
+                         '2017년 : ' + str(data_local['2017'].values[i]) + '<br>' +
+                         '2018년 : ' + str(data_local['2018'].values[i]) + '<br>' +
+                         '2019년 : ' + str(data_local['2019'].values[i]) + '<br>' +
+                         '10분위수 : ' + str(data_local['10분위수'].values[i]) + '분위수')
+        popup = folium.Popup(popup_content, max_width = 130) # 마커 내용 두께 조절
+        # 마커 생성
+        folium.Marker([data_local['latitude'].values[i], data_local['longitude'].values[i]],
+                      popup = popup,
+                      icon = folium.Icon(color='blue', icon = 'info-sign')).add_to(map) # 마커 아이콘
+
+    folium.LayerControl().add_to(map) # 상단 컬러바
+
+    map
+
+# 데이터프레임 시각화
+def data_visual_all(data): # 전체 데이터 출력
+    st.dataframe(data)
+
+def data_visual_per(data, percentile): # 10분위수 데이터 출력
+    data_local = data[data['10분위수'] == percentile]
+    data_local = data_local[['행정구역', '2015', '2016', '2017', '2018', '2019', '10분위수']]
+    st.dataframe(data_local)
+
 def run_search():
-# 행정구역별 탭
-    sidemenu = st.sidebar.selectbox('행정구역별', ['세종특별자치시', '대전광역시', '충청북도', '충청남도'])
-    if sidemenu == '세종특별자치시':
-        st.markdown("""
-        *※ 조회결과입니다. ※*
-        """)
-        city()
+    selected = option_menu(None, ["GRDP", "🔎 행정구역별 소득분포", "📁 데이터", "📊 EDA"],
+                           icons=['🏠', '🔎', '📁', '📊'], default_index=0, orientation="horizontal",
+                           styles={
+                               "container": {"padding": "0!important", "background-color": "#cccccc"},
+                               "nav-link": {"font-size": "15px", "text-align": "left", "margin": "0px",
+                                            "--hover-color": "#eee"},
+                               "nav-link-selected": {"background-color": "red"},
+                           }
+                           )
+    if selected == 'GRDP':
+        st.markdown('GRDP')
+        st.markdown('설명') # 지표 설명
 
-# 대전관역시 구별 탭
-    elif sidemenu == '대전광역시':
-        submenu2 = st.sidebar.selectbox('구별', ['대전광역시', '동구', '중구', '서구', '유성구', '대덕구'])
-        if submenu2 == '대전광역시':
-            st.markdown("""
-            *※ 조회결과입니다. ※*
-            """)
+        # 데이터 불러오기
+        data_processing()
 
-        elif submenu2 == '동구':
-            st.markdown("""
-            *※ 조회결과입니다. ※*
-            """)
+        # 셀렉 박스 (전체, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
 
-        elif submenu2 == '중구':
-            st.markdown("""
-            *※ 조회결과입니다. ※*
-            """)
+        # 화면을 2:1 비율로 분할
+        col1, col2 = st.columns([2, 1])
+        with col1:
+            st.header("지도")
+        if selectbox == '전체':
+            data_folium_all(geo_data, grdp_data)
+        elif selectbox == '1':
+            data_folium_local(geo_data, grdp_data, 1)
+        elif selectbox == '2':
+            data_folium_local(geo_data, grdp_data, 2)
+        elif selectbox == '3':
+            data_folium_local(geo_data, grdp_data, 3)
+        elif selectbox == '4':
+            data_folium_local(geo_data, grdp_data, 4)
+        elif selectbox == '5':
+            data_folium_local(geo_data, grdp_data, 5)
+        elif selectbox == '6':
+            data_folium_local(geo_data, grdp_data, 6)
+        elif selectbox == '7':
+            data_folium_local(geo_data, grdp_data, 7)
+        elif selectbox == '8':
+            data_folium_local(geo_data, grdp_data, 8)
+        elif selectbox == '9':
+            data_folium_local(geo_data, grdp_data, 9)
+        elif selectbox == '10':
+            data_folium_local(geo_data, grdp_data, 10)
 
-        elif submenu2 == '서구':
-            st.markdown("""
-            *※ 조회결과입니다. ※*
-            """)
+        with col2:
+            st.header("행정구역 정보")
+        if selectbox == '전체':
+            data_visual_all(data)
+        elif selectbox == '1':
+            data_visual_per(data, 1)
+        elif selectbox == '2':
+            data_visual_per(data, 2)
+        elif selectbox == '3':
+            data_visual_per(data, 3)
+        elif selectbox == '4':
+            data_visual_per(data, 4)
+        elif selectbox == '5':
+            data_visual_per(data, 5)
+        elif selectbox == '6':
+            data_visual_per(data, 6)
+        elif selectbox == '7':
+            data_visual_per(data, 7)
+        elif selectbox == '8':
+            data_visual_per(data, 8)
+        elif selectbox == '9':
+            data_visual_per(data, 9)
+        elif selectbox == '10':
+            data_visual_per(data, 10)
 
-        elif submenu2 == '유성구':
-            st.markdown("""
-            *※ 조회결과입니다. ※*
-            """)
-
-        elif submenu2 == '대덕구':
-            st.markdown("""
-            *※ 조회결과입니다. ※*
-            """)
-
-# 충청북도 시별 탭
-    elif sidemenu == '충청북도':
-        submenu3 = st.sidebar.selectbox('시군별', ['충청북도', '충주시', '제천시', '청주시', '보은군', '옥천군', '영동군', '진천군', '괴산군', '음성군', '단양군', '증평군'])
-        if submenu3 == '충청북도':
-            st.markdown("""
-            *※ 조회결과입니다. ※*
-            """)
-
-        elif submenu3 == '충주시':
-            st.markdown("""
-            *※ 조회결과입니다. ※*
-            """)
-
-        elif submenu3 == '제천시':
-            st.markdown("""
-            *※ 조회결과입니다. ※*
-            """)
-
-        elif submenu3 == '청주시':
-            st.markdown("""
-            *※ 조회결과입니다. ※*
-            """)
-
-        elif submenu3 == '보은군':
-            st.markdown("""
-            *※ 조회결과입니다. ※*
-            """)
-
-        elif submenu3 == '옥천군':
-            st.markdown("""
-            *※ 조회결과입니다. ※*
-            """)
-
-        elif submenu3 == '영동군':
-            st.markdown("""
-            *※ 조회결과입니다. ※*
-            """)
-
-        elif submenu3 == '진천군':
-            st.markdown("""
-            *※ 조회결과입니다. ※*
-            """)
-
-        elif submenu3 == '괴산군':
-            st.markdown("""
-            *※ 조회결과입니다. ※*
-            """)
-
-        elif submenu3 == '음성군':
-            st.markdown("""
-            *※ 조회결과입니다. ※*
-            """)
-
-        elif submenu3 == '단양군':
-            st.markdown("""
-            *※ 조회결과입니다. ※*
-            """)
-
-        elif submenu3 == '증평군':
-            st.markdown("""
-            *※ 조회결과입니다. ※*
-            """)
-
-# 충청남도 시별 탭
-    elif sidemenu == '충청남도':
-        submenu4 = st.sidebar.selectbox('시군별', ['충청남도', '천안시', '공주시', '보령시', '아산시', '서산시', '논산시', '계룡시', '당진시', '금산군', '부여군', '서천군', '청양군', '홍성군', '예산군', '태안군'])
-        if submenu4 == '충청남도':
-            st.markdown("""
-            *※ 조회결과입니다. ※*
-            """)
-
-        elif submenu4 == '천안시':
-            st.markdown("""
-            *※ 조회결과입니다. ※*
-            """)
-
-        elif submenu4 == '공주시':
-            st.markdown("""
-            *※ 조회결과입니다. ※*
-            """)
-
-        elif submenu4 == '보령시':
-            st.markdown("""
-            *※ 조회결과입니다. ※*
-            """)
-
-        elif submenu4 == '아산시':
-            st.markdown("""
-            *※ 조회결과입니다. ※*
-            """)
-
-        elif submenu4 == '서산시':
-            st.markdown("""
-            *※ 조회결과입니다. ※*
-            """)
-
-        elif submenu4 == '논산시':
-            st.markdown("""
-            *※ 조회결과입니다. ※*
-            """)
-
-        elif submenu4 == '계룡시':
-            st.markdown("""
-            *※ 조회결과입니다. ※*
-            """)
-
-        elif submenu4 == '당진시':
-            st.markdown("""
-            *※ 조회결과입니다. ※*
-            """)
-
-        elif submenu4 == '금산군':
-            st.markdown("""
-            *※ 조회결과입니다. ※*
-            """)
-
-        elif submenu4 == '부여군':
-            st.markdown("""
-            *※ 조회결과입니다. ※*
-            """)
-
-        elif submenu4 == '서천군':
-            st.markdown("""
-            *※ 조회결과입니다. ※*
-            """)
-
-        elif submenu4 == '청양군':
-            st.markdown("""
-                *※ 조회결과입니다. ※*
-                """)
-
-        elif submenu4 == '홍성군':
-            st.markdown("""
-                *※ 조회결과입니다. ※*
-                """)
-
-        elif submenu4 == '예산군':
-            st.markdown("""
-                *※ 조회결과입니다. ※*
-                """)
-
-        elif submenu4 == '태안군':
-            st.markdown("""
-                *※ 조회결과입니다. ※*
-                """)
+# 추가 선 차트

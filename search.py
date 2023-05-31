@@ -164,4 +164,6 @@ def run_search():
         elif selectbox == '10':
             data_visual_per(data, 10)
 
-# 추가 선 차트
+    # 추가 선 차트
+    st.markdown('설명')
+    st.markdown('선차트')

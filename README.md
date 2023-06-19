@@ -1,4 +1,4 @@
-# Final Project - 충청권 도시 양극화 (2023.05.22 ~ 2023.06.14)
+# 충청권 도시 양극화 프로젝트 (2023.05.22 ~ 2023.06.14)
 <br/>
 
 ## [1. Streamlit 웹 서비스](https://sukyungjang-final-project-app-j1pife.streamlit.app/ "Streamlit Link")<br/>
@@ -27,6 +27,7 @@ NABIS 국가균형발전종합정보시스템: <https://www.nabis.go.kr/> <br/>
 ![image](https://github.com/SukyungJang/Final_Project/blob/main/img/ERD.png)
 
 <br/>
+
 ## 🧑‍🤝‍🧑 팀 구성
 
 - 사용언어 : Python 3.10.10
@@ -66,7 +67,7 @@ NABIS 국가균형발전종합정보시스템: <https://www.nabis.go.kr/> <br/>
 - 버전 확인
   - VS Code : 
   - Python : 3.10.10
-  - 라이브러리 : Json(0.9.14), Pandas(2.0.1), Folium(0.14.0), Plotly(5.14.1), Plotly_express(0.4.1), streamlit(1.22.0)
+  - 라이브러리 : Json(0.9.14), Pandas(2.0.1), Folium(0.14.0), Plotly(5.14.1), Plotly_express(0.4.1), streamlit(1.22.0), scikit-learn(1.2.2), seaborn(0.12.2)
 
 - 프로젝트 파일을 다운로드 받습니다.
 ```

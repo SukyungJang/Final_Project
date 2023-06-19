@@ -3,11 +3,14 @@
 
 ---
 
-[![Blogger](https://img.shields.io/badge/tistory-FF5722?style=for-the-badge&logo=blogger&logoColor=white)](https://moonstyle1997.tistory.com/)
-[![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/MoonStyIe)
-[![Microsoft PowerPoint](https://img.shields.io/badge/portfolio-B7472A?style=for-the-badge&logo=microsoft-powerpoint&logoColor=white)](https://github.com/MoonStyIe/Parkinson/blob/9bed58006a8d646d4058b96eca4f8704263e94c2/pdf/2%EC%A1%B0_%ED%8C%8C%ED%82%A8%EC%8A%A8_%EC%A7%88%EB%B3%91_%EC%A7%84%EB%8B%A8%EC%98%88%EC%B8%A1.pdf)
-[![YouTube](https://img.shields.io/badge/presentation-%23FF0000.svg?style=for-the-badge&logo=YouTube&logoColor=white)](https://youtu.be/XZtytuxL8ws)
-[![Mega.nz](https://img.shields.io/badge/Homepage-%23D90007.svg?style=for-the-badge&logo=home-assistant&logoColor=white)](https://github.com/MoonStyIe/Parkinson/blob/e4ea531c446b2dbe079b19ce68930753cfd72afa/img/%ED%99%88%ED%8E%98%EC%9D%B4%EC%A7%80.png)
+<br/>
+
+## [1. Streamlit 웹 서비스](https://sukyungjang-store-sales-project-main-app-4r8mb6.streamlit.app/ "Streamlit Link")<br/>
+
+## [2. 발표 영상](https://www.youtube.com/watch?v=YZGgZdaFF78 "Presentation Link")<br/>
+
+## [3. PDF 파일](https://github.com/SukyungJang/Store_Sales_Project/blob/main/pdf/Attention_final.pdf "PDF Link")<br/>
+
 
 ---
 
@@ -51,7 +54,7 @@ NABIS 국가균형발전종합정보시스템: <https://www.nabis.go.kr/> <br/>
 
 - 프로젝트 파일을 다운로드 받습니다.
 ```
-git clone https://github.com/jangsukyung/Store-Sales-Project.git
+git clone https://github.com/SukyungJang/Final_Project.git
 ```
 - 프로젝트 경로에서 가상환경 설치 후 접속합니다. (Windows 10 기준)
 ```

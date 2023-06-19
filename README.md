@@ -66,7 +66,7 @@ NABIS 국가균형발전종합정보시스템: <https://www.nabis.go.kr/> <br/>
 - 버전 확인
   - VS Code : 
   - Python : 3.10.10
-  - 라이브러리 : Pandas(1.5.3), NumPy(1.24.3), Math, Seaborn(0.11.2), Streamlit(1.22.0), Matplotlib(3.7.1), Plotly(5.14.1), Scikit-learn(1.2.2), Scipy(1.10.1)
+  - 라이브러리 : Json(0.9.14), Pandas(2.0.1), Folium(0.14.0), Plotly(5.14.1), Plotly_express(0.4.1), streamlit(1.22.0)
 
 - 프로젝트 파일을 다운로드 받습니다.
 ```

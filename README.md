@@ -26,7 +26,7 @@ NABIS 국가균형발전종합정보시스템: <https://www.nabis.go.kr/> <br/>
 
 ## 📊 ERD
 
-<br/>
+![image]()
 
 ## 🧑‍🤝‍🧑 팀 구성
 

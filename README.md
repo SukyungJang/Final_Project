@@ -26,10 +26,15 @@ NABIS 국가균형발전종합정보시스템: <https://www.nabis.go.kr/> <br/>
 
 ## 📊 ERD
 
-![image]()
-
+![image](https://github.com/SukyungJang/Final_Project/blob/main/img/ERD.png)
+<br/>
 ## 🧑‍🤝‍🧑 팀 구성
 
+- 사용언어 : Python 3.10.10
+- 작업툴 : VS Code, pycharm
+- 인원 : 3명
+- 주요 업무 : 소득 분포 별 공간 분석 및 지도 시각화, 도시 양극화 지수 개발, 웹 서비스 구현
+- 기간 : 2023.05.22 ~ 2023.06.14
 <br/>
 
 ## 💻 주요 기능
@@ -38,6 +43,29 @@ NABIS 국가균형발전종합정보시스템: <https://www.nabis.go.kr/> <br/>
 
 ## 📥 설치 방법
 
+### Windows
+- 버전 확인
+  - VS Code : 
+  - Python : 3.10.10
+  - 라이브러리 : Pandas(1.5.3), NumPy(1.24.3), Math, Seaborn(0.11.2), Streamlit(1.22.0), Matplotlib(3.7.1), Plotly(5.14.1), Scikit-learn(1.2.2), Scipy(1.10.1)
+
+- 프로젝트 파일을 다운로드 받습니다.
+```
+git clone https://github.com/jangsukyung/Store-Sales-Project.git
+```
+- 프로젝트 경로에서 가상환경 설치 후 접속합니다. (Windows 10 기준)
+```
+virtualenv venv
+source venv/Scripts/activate
+```
+- 라이브러리를 설치합니다.
+```
+pip install -r requirements.txt
+```
+- streamlit 명령어를 실행합니다.
+```
+streamlit run app.py
+```
 <br/>
 
 ## 📅 주요 기능 업데이트 내용 <br/>

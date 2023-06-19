@@ -1,8 +1,4 @@
-# Final Project - 충청권 도시 양극화 (2023.05.22 ~)
-<br/>
-
----
-
+# Final Project - 충청권 도시 양극화 (2023.05.22 ~ 2023.06.14)
 <br/>
 
 ## [1. Streamlit 웹 서비스](https://sukyungjang-store-sales-project-main-app-4r8mb6.streamlit.app/ "Streamlit Link")<br/>
@@ -10,7 +6,6 @@
 ## [2. 발표 영상](https://www.youtube.com/watch?v=YZGgZdaFF78 "Presentation Link")<br/>
 
 ## [3. PDF 파일](https://github.com/SukyungJang/Store_Sales_Project/blob/main/pdf/Attention_final.pdf "PDF Link")<br/>
-
 
 ---
 

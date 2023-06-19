@@ -1,7 +1,7 @@
 # Final Project - 충청권 도시 양극화 (2023.05.22 ~ 2023.06.14)
 <br/>
 
-## [1. Streamlit 웹 서비스](https://sukyungjang-store-sales-project-main-app-4r8mb6.streamlit.app/ "Streamlit Link")<br/>
+## [1. Streamlit 웹 서비스](https://sukyungjang-final-project-app-j1pife.streamlit.app/ "Streamlit Link")<br/>
 
 ## [2. 발표 영상](https://www.youtube.com/watch?v=YZGgZdaFF78 "Presentation Link")<br/>
 
@@ -25,6 +25,7 @@ NABIS 국가균형발전종합정보시스템: <https://www.nabis.go.kr/> <br/>
 ## 📊 ERD
 
 ![image](https://github.com/SukyungJang/Final_Project/blob/main/img/ERD.png)
+
 <br/>
 ## 🧑‍🤝‍🧑 팀 구성
 
@@ -37,7 +38,27 @@ NABIS 국가균형발전종합정보시스템: <https://www.nabis.go.kr/> <br/>
 
 ## 💻 주요 기능
 
-<br/>
+- **개요**
+  - 프로젝트 개요 설명
+
+- **행정구역별 소득분포**
+  - 충청권 지역별 GRDP, 1인당 GRDP, 1인당 소비금액 10분위 분배 및 지도 시각화
+
+![image](https://github.com/SukyungJang/Final_Project/blob/main/img/GRDP.png)
+
+  - 연도별 선 그래프
+
+![image](https://github.com/SukyungJang/Final_Project/blob/main/img/GRDPLINE.png)
+
+- **1차 도시 양극화 지수**
+  - 충남형 도시 양극화 지수와 균형발전지표 활용 1차 도시 양극화 지수 개발을 활용한 지도 시각화
+
+![image](https://github.com/SukyungJang/Final_Project/blob/main/img/1차양극화.png)
+
+- **최종 도시 양극화 지수**
+  - 1차 양극화 지수를 로지스틱 회귀분석을 통해 개발하여 최종 도시 양극화 지수 개발을 활용한 지도 시각화
+
+![image](https://github.com/SukyungJang/Final_Project/blob/main/img/최종양극화.png)
 
 ## 📥 설치 방법
 
@@ -123,6 +144,8 @@ streamlit run app.py
 - 분석
     + 회귀분석 공부
 
+---
+
 *2023-05-26(금)*
 - 대시보드
     + 조회 탭 재구성
@@ -171,3 +194,49 @@ streamlit run app.py
     + folium 라이브러리를 이용한 시각화 데이터
 
 ---
+
+2023-06-01(목)
+- 대시보드
+    + 행적구역별 소득분포 탭 완성
+    + 도시 양극화 지수 탭 작성
+- PPT
+    + 목차 재작성
+    + 웹서비스 소개 구조화
+- 분석
+    + 지수 개발
+    + 로지스틱 회귀분석 검증
+- ERD
+    + folium을 이용해 행적구역별 소득분포 탭 시각화 작성
+    + folium을 이용해 도시 양극화 지수 탭 시각화 작성
+
+---
+
+2023-06-02(금)
+- 대시보드
+    + 도시 양극화 지수 탭 재작성
+- PPT
+    + 모든 탭 재구성
+- ERD
+    + folium을 이용해 도시 양극화 지수 탭 시각화 작성
+
+---
+
+2023-06-05(월)
+- PPT
+    + 탭 재구성
+
+---
+
+2023-06-07(화)
+- 대시보드
+    + 도시 양극화 지수 시각화 추가
+    + 도시 양극화 지수 설명 추가
+- PPT
+    + 개요 탭 재구성
+    + 공간 분석 탭 재구성
+- ERD
+    + folium을 이용한 도시 양극화 지수 시각화
+
+---
+2023-06-08(수) ~ 
+- PPT 정리
